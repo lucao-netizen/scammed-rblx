@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="SCAMMED – die fiktive Comedy-Callcenter-Simulation auf Roblox. CALL. CONVINCE. CLIMB.">
+  <title>SCAMMED — CALL. CONVINCE. CLIMB.</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    :root {
+      --bg: #070707;
+      --panel: #101010;
+      --panel-2: #151515;
+      --text: #f4f4f4;
+      --muted: #9a9a9a;
+      --red: #ff3030;
+      --red-dark: #a40000;
+      --line: rgba(255,255,255,.09);
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 80% 0%, rgba(255,48,48,.10), transparent 30%),
+        radial-gradient(circle at 0% 40%, rgba(255,48,48,.05), transparent 25%),
+        var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin-inline: auto;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: rgba(7,7,7,.72);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-inner {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+
+    .logo span { color: var(--red); }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      color: #c8c8c8;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover { color: white; }
+
+    .nav-btn {
+      background: var(--red);
+      color: white;
+      padding: 11px 16px;
+      border-radius: 9px;
+      font-weight: 800;
+      font-size: 13px;
+      box-shadow: 0 0 25px rgba(255,48,48,.18);
+      transition: .2s;
+    }
+
+    .nav-btn:hover { transform: translateY(-2px); }
+
+    /* HERO */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      align-items: center;
+      padding: 110px 0 70px;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(to bottom, transparent 60%, var(--bg) 100%);
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      min-height: 650px;
+      display: flex;
+      align-items: flex-end;
+      background: #111;
+      box-shadow: 0 25px 90px rgba(0,0,0,.55);
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.48) 45%, rgba(0,0,0,.08) 100%),
+        linear-gradient(0deg, rgba(0,0,0,.82), transparent 65%),
+        url("cover.jpg") center/cover no-repeat;
+      transform: scale(1.01);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 650px;
+      padding: 56px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255,48,48,.35);
+      background: rgba(255,48,48,.08);
+      color: #ff6a6a;
+      padding: 8px 11px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 12px var(--red);
+    }
+
+    h1 {
+      font-size: clamp(54px, 9vw, 110px);
+      line-height: .82;
+      letter-spacing: -.065em;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    h1 span { color: var(--red); }
+
+    .hero-sub {
+      margin-top: 22px;
+      color: #d1d1d1;
+      max-width: 560px;
+      font-size: clamp(15px, 2vw, 19px);
+      line-height: 1.65;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 48px;
+      padding: 0 19px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 14px;
+      transition: .2s ease;
+    }
+
+    .btn-red {
+      background: var(--red);
+      box-shadow: 0 0 28px rgba(255,48,48,.20);
+    }
+
+    .btn-red:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,48,48,.22); }
+
+    .btn-dark {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.06);
+    }
+
+    .btn-dark:hover { background: rgba(255,255,255,.1); }
+
+    /* GENERAL */
+    section { padding: 100px 0; }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 38px;
+    }
+
+    .section-kicker {
+      color: var(--red);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: clamp(34px, 6vw, 62px);
+      line-height: .95;
+      letter-spacing: -.045em;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      max-width: 450px;
+      line-height: 1.65;
+      font-size: 14px;
+    }
+
+    /* RULE */
+    .rule {
+      border: 1px solid rgba(255,48,48,.28);
+      background: linear-gradient(135deg, rgba(255,48,48,.10), rgba(255,255,255,.025));
+      border-radius: 18px;
+      padding: 42px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .rule::before {
+      content: "01";
+      position: absolute;
+      right: 20px;
+      top: -25px;
+      font-size: 150px;
+      font-weight: 900;
+      color: rgba(255,255,255,.025);
+    }
+
+    .rule small {
+      color: #ff6666;
+      font-weight: 900;
+      letter-spacing: .16em;
+      font-size: 11px;
+    }
+
+    .rule h2 { margin-top: 10px; }
+    .rule p {
+      margin: 15px auto 0;
+      max-width: 650px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* STEPS */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: linear-gradient(145deg, #121212, #0c0c0c);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 27px;
+      transition: .25s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255,48,48,.3);
+    }
+
+    .number {
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      background: rgba(255,48,48,.11);
+      color: var(--red);
+      font-weight: 900;
+      font-size: 13px;
+      margin-bottom: 30px;
+    }
+
+    .card h3 { font-size: 20px; margin-bottom: 9px; }
+    .card p { color: var(--muted); line-height: 1.65; font-size: 14px; }
+
+    /* CALLERS */
+    .caller {
+      min-height: 230px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .caller-tag {
+      color: #aaa;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-weight: 800;
+    }
+
+    .caller h3 { margin-top: 20px; }
+
+    /* FEATURES */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .feature {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 27px;
+      background: #0e0e0e;
+    }
+
+    .feature strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 9px;
+    }
+
+    .feature p {
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 14px;
+    }
+
+    /* CTA */
+    .cta {
+      text-align: center;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 70px 24px;
+      background:
+        radial-gradient(circle at center, rgba(255,48,48,.14), transparent 55%),
+        #0c0c0c;
+    }
+
+    .cta h2 { max-width: 800px; margin: auto; }
+    .cta p {
+      color: var(--muted);
+      margin: 17px auto 0;
+      max-width: 560px;
+      line-height: 1.65;
+    }
+
+    footer {
+      padding: 30px 0 40px;
+      color: #666;
+      font-size: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+    }
+
+    /* REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 800px) {
+      .nav-links { display: none; }
+      .nav-inner { min-height: 62px; }
+
+      .hero { padding-top: 88px; }
+      .hero-card { min-height: 620px; border-radius: 16px; }
+      .hero-card::before {
+        background:
+          linear-gradient(0deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.35) 72%),
+          url("cover.jpg") center/cover no-repeat;
+      }
+
+      .hero-content { padding: 28px; }
+      .hero-sub { font-size: 14px; }
+
+      section { padding: 72px 0; }
+      .section-head { display: block; }
+      .section-desc { margin-top: 15px; }
+
+      .grid-3,
+      .features { grid-template-columns: 1fr; }
+
+      .rule { padding: 32px 22px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 430px) {
+      .container { width: min(100% - 20px, var(--max)); }
+      .nav-btn { padding: 9px 12px; font-size: 12px; }
+      .hero-card { min-height: 570px; }
+      h1 { font-size: 62px; }
+      .buttons { flex-direction: column; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="#" class="logo">SCAM<span>MED</span></a>
+
+      <div class="nav-links">
+        <a href="#how">Gameplay</a>
+        <a href="#callers">Callers</a>
+        <a href="#features">Features</a>
+        <a href="#community">Community</a>
+      </div>
+
+      <a class="nav-btn" href="https://www.roblox.com/share?code=0512fee003fe364c8d87b2164efbcc29&type=ExperienceDetails&stamp=1791438310755" target="_blank">
+        PLAY ON ROBLOX
+      </a>
+    </div>
+  </nav>
+
+  <main>
+
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="hero-content">
+            <div class="eyebrow">Fictional comedy simulation</div>
+
+            <h1>SCAM<span>MED</span></h1>
+
+            <p class="hero-sub">
+              Willkommen im Callcenter, in dem Vertrauen unser Produkt ist.
+              Nimm Anrufe an, überzeuge deine Caller und erreiche dein Tagesziel,
+              bevor die Zeit abläuft.
+            </p>
+
+            <div class="buttons">
+              <a class="btn btn-red" href="https://www.roblox.com/share?code=0512fee003fe364c8d87b2164efbcc29&type=ExperienceDetails&stamp=1791438310755" target="_blank">
+                ▶ JETZT SPIELEN
+              </a>
+              <a class="btn btn-dark" href="#how">SO FUNKTIONIERT'S ↓</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="rule reveal">
+          <small>RULE #1</small>
+          <h2>DON'T LET THEM REDEEM IT.</h2>
+          <p>
+            Arbeite die Telefone ab, baue Vertrauen auf und schließe deine Calls.
+            Aber pass auf: Zu viele Beschwerden und die Polizei steht plötzlich im Büro.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">Gameplay</div>
+            <h2>CALL. CONVINCE.<br>CLIMB.</h2>
+          </div>
+          <p class="section-desc">
+            Dein Schichtablauf ist einfach. Das Chaos kommt von den Leuten,
+            die du am anderen Ende der Leitung bekommst.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card reveal">
+            <div class="number">01</div>
+            <h3>Clock in</h3>
+            <p>Starte deine Schicht, schnapp dir einen Laptop und geh an die Telefone.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="number">02</div>
+            <h3>Take the call</h3>
+            <p>Rede mit freundlichen, nervösen, misstrauischen, wütenden oder verwirrten Callern.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="number">03</div>
+            <h3>Hit the goal</h3>
+            <p>Erreiche dein Tagesziel, bevor die Zeit abläuft. Danach kannst du ausstempeln.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="callers">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">Caller Studio</div>
+            <h2>WHO'S<br>CALLING?</h2>
+          </div>
+          <p class="section-desc">
+            Nicht jeder Caller reagiert gleich. Jeder Anruf kann anders laufen.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card caller reveal">
+            <span class="caller-tag">01 / friendly</span>
+            <h3>Der Freundliche</h3>
+            <p>Er klingt entspannt. Vielleicht ein bisschen zu entspannt.</p>
+          </article>
+
+          <article class="card caller reveal">
+            <span class="caller-tag">02 / suspicious</span>
+            <h3>Der Misstrauische</h3>
+            <p>Er stellt Fragen. Viele Fragen.</p>
+          </article>
+
+          <article class="card caller reveal">
+            <span class="caller-tag">03 / angry</span>
+            <h3>Der Wütende</h3>
+            <p>Dieser Call könnte sehr schnell sehr laut werden.</p>
+          </article>
+
+          <article class="card caller reveal">
+            <span class="caller-tag">04 / nervous</span>
+            <h3>Der Nervöse</h3>
+            <p>Du musst erstmal Vertrauen aufbauen.</p>
+          </article>
+
+          <article class="card caller reveal">
+            <span class="caller-tag">05 / confused</span>
+            <h3>Der Verwirrte</h3>
+            <p>Was wollte er nochmal? Gute Frage.</p>
+          </article>
+
+          <article class="card caller reveal">
+            <span class="caller-tag">06 / custom</span>
+            <h3>Deine Caller</h3>
+            <p>Im Caller Studio kannst du eigene Caller zeichnen, die dich später anrufen.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">Inside the office</div>
+            <h2>MORE THAN<br>JUST CALLS.</h2>
+          </div>
+          <p class="section-desc">
+            Wenn gerade niemand anruft, gibt es im Büro genug Unsinn zu machen.
+          </p>
+        </div>
+
+        <div class="features">
+          <article class="feature reveal">
+            <strong>💻 Work the phones</strong>
+            <p>Arbeite deine Calls ab, baue Vertrauen auf und versuche, dein Tagesziel zu schaffen.</p>
+          </article>
+
+          <article class="feature reveal">
+            <strong>👥 Solo oder mit Freunden</strong>
+            <p>Spiele alleine oder bring deine Freunde mit ins Callcenter.</p>
+          </article>
+
+          <article class="feature reveal">
+            <strong>📄 Office Chaos</strong>
+            <p>Wirf Papierbälle, ärgere deine Kollegen und mach das Büro ein bisschen weniger professionell.</p>
+          </article>
+
+          <article class="feature reveal">
+            <strong>🚨 Watch out for the boss</strong>
+            <p>Ranjid will NUMBERS. Zu viele Beschwerden können außerdem sehr schnell unangenehm werden.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="community">
+      <div class="container">
+        <div class="cta reveal">
+          <div class="section-kicker">Join the chaos</div>
+          <h2>READY TO CLOCK IN?</h2>
+          <p>
+            SCAMMED ist eine fiktive Comedy-Simulation.
+            Alle Namen, Nummern und Daten sind frei erfunden.
+          </p>
+
+          <div class="buttons" style="justify-content:center;">
+            <a class="btn btn-red" href="https://www.roblox.com/share?code=0512fee003fe364c8d87b2164efbcc29&type=ExperienceDetails&stamp=1791438310755" target="_blank">
+              PLAY ON ROBLOX
+            </a>
+            <a class="btn btn-dark" href="https://discord.gg/abaDCdpz6" target="_blank">
+              JOIN DISCORD
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 SCAMMED — CALL. CONVINCE. CLIMB.</div>
+      <div>Fictional comedy simulation. All names, numbers and data are imaginary.</div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
