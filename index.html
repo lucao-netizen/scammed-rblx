@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
@@ -20,9 +21,9 @@
       --max: 1180px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; cursor: none; /* Custom Cursor */ }
+    * { box-sizing: border-box; margin: 0; padding: 0; cursor: none; }
     html { scroll-behavior: smooth; }
-    
+
     body {
       font-family: Inter, Arial, sans-serif;
       background:
@@ -80,6 +81,13 @@
     .nav-links a:hover { color: white; }
     .nav-links a:hover::after { width: 100%; }
 
+    .nav-btn {
+      background: var(--red); color: white; padding: 11px 16px;
+      border-radius: 9px; font-weight: 800; font-size: 13px;
+      box-shadow: 0 0 25px rgba(255,48,48,.18); transition: .2s;
+    }
+    .nav-btn:hover { transform: translateY(-2px); }
+
     /* HERO */
     .hero { min-height: 100svh; display: grid; align-items: center; padding: 110px 0 70px; position: relative; }
     .hero-card {
@@ -89,20 +97,22 @@
     }
     .hero-card::before {
       content: ""; position: absolute; inset: 0;
-      background: linear-gradient(90deg, rgba(0,0,0,.9) 0%, rgba(0,0,0,.6) 45%, rgba(0,0,0,.1) 100%),
-                  url("https://images.unsplash.com/photo-1549923746-c502d488b3ea?q=80&w=2071&auto=format&fit=crop") center/cover no-repeat;
-      transform: scale(1.02); transition: transform 5s ease;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.55) 45%, rgba(0,0,0,.15) 100%),
+        linear-gradient(0deg, rgba(0,0,0,.85), transparent 65%),
+        url("cover.jpg") center/cover no-repeat;
+      transform: scale(1.01); transition: transform 5s ease;
     }
-    .hero-card:hover::before { transform: scale(1.05); }
-    
+    .hero-card:hover::before { transform: scale(1.03); }
+
     .hero-content { position: relative; z-index: 2; max-width: 650px; padding: 56px; }
-    
+
     .live-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(0, 255, 0, 0.3);
+      background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(0, 255, 0, 0.35);
       color: #00ff00; padding: 6px 12px; border-radius: 999px;
       font-size: 12px; font-weight: 700; margin-bottom: 15px;
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(6px);
     }
     .live-dot { width: 8px; height: 8px; background: #00ff00; border-radius: 50%; box-shadow: 0 0 10px #00ff00; animation: pulse-green 1.5s infinite; }
     @keyframes pulse-green { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } 100% { opacity: 1; transform: scale(1); } }
@@ -113,10 +123,15 @@
       color: #ff6a6a; padding: 8px 11px; border-radius: 999px;
       font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 18px;
     }
+    .eyebrow::before {
+      content: ""; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--red); box-shadow: 0 0 12px var(--red);
+    }
+
     h1 { font-size: clamp(54px, 9vw, 110px); line-height: .82; letter-spacing: -.065em; font-weight: 900; text-transform: uppercase; text-shadow: 0 10px 30px rgba(0,0,0,0.8); }
     h1 span { color: var(--red); }
     .hero-sub { margin-top: 22px; color: #d1d1d1; max-width: 560px; font-size: clamp(15px, 2vw, 19px); line-height: 1.65; }
-    
+
     .buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
     .btn {
       display: inline-flex; justify-content: center; align-items: center; gap: 10px;
@@ -125,15 +140,13 @@
     }
     .btn svg { width: 20px; height: 20px; fill: currentColor; }
 
-    /* ROBLOX BUTTON */
-    .btn-red { background: var(--red); box-shadow: 0 0 20px rgba(255,48,48,.3); border: 1px solid transparent; }
+    .btn-red { background: var(--red); box-shadow: 0 0 20px rgba(255,48,48,.3); border: 1px solid transparent; color: white; }
     .btn-red:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 35px rgba(255,48,48,.5); background: #ff4040; border: 1px solid #ff7070; }
-    
-    /* DISCORD BUTTON */
+
     .btn-blurple { background: #5865F2; box-shadow: 0 0 20px rgba(88, 101, 242, 0.3); color: white; border: 1px solid transparent; }
     .btn-blurple:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 35px rgba(88, 101, 242, 0.5); background: #6974f5; }
 
-    .btn-dark { border: 1px solid var(--line); background: rgba(255,255,255,.06); backdrop-filter: blur(10px); }
+    .btn-dark { border: 1px solid var(--line); background: rgba(255,255,255,.06); backdrop-filter: blur(10px); color: white; }
     .btn-dark:hover { background: rgba(255,255,255,.1); transform: translateY(-3px); }
 
     /* TICKER TAPE */
@@ -191,6 +204,7 @@
     .feature { border: 1px solid var(--line); border-radius: 16px; padding: 30px; background: #0e0e0e; transition: 0.3s; }
     .feature:hover { border-color: #444; background: #151515; transform: scale(1.02); }
     .feature strong { display: block; font-size: 18px; margin-bottom: 9px; color: #fff; }
+    .feature p { color: var(--muted); line-height: 1.65; font-size: 14px; }
 
     /* CTA */
     .cta {
@@ -218,7 +232,7 @@
       .section-desc { margin-top: 15px; }
       .rule { padding: 32px 22px; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
-      .cursor-dot, .cursor-outline { display: none; /* Keine Custom Cursor am Handy */ }
+      .cursor-dot, .cursor-outline { display: none; }
       * { cursor: auto; }
     }
     @media (max-width: 430px) {
@@ -231,7 +245,7 @@
 </head>
 <body>
 
-  <!-- AUDIO FILES (Versteckt, werden per JS abgerufen) -->
+  <!-- AUDIO FILES -->
   <audio id="sound-roblox" src="https://www.myinstants.com/media/sounds/roblox-death-sound_1.mp3" preload="auto"></audio>
   <audio id="sound-discord" src="https://www.myinstants.com/media/sounds/discord-join.mp3" preload="auto"></audio>
 
@@ -264,10 +278,10 @@
           <div class="hero-content">
             <div class="live-badge">
               <div class="live-dot"></div>
-              <span id="player-count">482</span> Players In-Game
+              <span id="player-count">900</span> Spieler In-Game
             </div>
 
-            <div class="eyebrow">Fictional comedy simulation</div>
+            <div class="eyebrow">Fiktive Comedy-Simulation</div>
             <h1>SCAM<span>MED</span></h1>
             <p class="hero-sub">
               Willkommen im Callcenter, in dem Vertrauen unser Produkt ist.
@@ -276,7 +290,6 @@
             </p>
 
             <div class="buttons">
-              <!-- Roblox Button mit Sound & Icon -->
               <a class="btn btn-red hover-target roblox-click" href="https://www.roblox.com/share?code=0512fee003fe364c8d87b2164efbcc29&type=ExperienceDetails&stamp=1791438310755" target="_blank">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5.42 2.222 21.777 5.42l-3.197 16.357-16.358-3.198L5.42 2.222zM14.6 10.36l-3.805-.744-.744 3.805 3.804.743.745-3.804z"/></svg>
                 JETZT SPIELEN
@@ -291,14 +304,14 @@
     <!-- TICKER TAPE -->
     <div class="ticker-wrap">
       <div class="ticker">
-        <span>+++ UPDATE: NEW CALLERS ADDED +++</span>
+        <span>+++ UPDATE: NEUE CALLER HINZUGEFÜGT +++</span>
         <span>DON'T LET THEM REDEEM IT</span>
-        <span>+++ REACH YOUR QUOTA +++</span>
-        <span>BEWARE OF THE POLICE</span>
-        <span>+++ UPDATE: NEW CALLERS ADDED +++</span>
+        <span>+++ ERREICHE DEIN TAGESZIEL +++</span>
+        <span>PASS AUF DIE POLIZEI AUF</span>
+        <span>+++ UPDATE: NEUE CALLER HINZUGEFÜGT +++</span>
         <span>DON'T LET THEM REDEEM IT</span>
-        <span>+++ REACH YOUR QUOTA +++</span>
-        <span>BEWARE OF THE POLICE</span>
+        <span>+++ ERREICHE DEIN TAGESZIEL +++</span>
+        <span>PASS AUF DIE POLIZEI AUF</span>
       </div>
     </div>
 
@@ -306,7 +319,7 @@
     <section>
       <div class="container">
         <div class="rule reveal">
-          <small>RULE #1</small>
+          <small>REGEL #1</small>
           <h2>DON'T LET THEM REDEEM IT.</h2>
           <p>
             Arbeite die Telefone ab, baue Vertrauen auf und schließe deine Calls.
@@ -333,17 +346,17 @@
         <div class="grid-3">
           <article class="card reveal hover-target">
             <div class="number">01</div>
-            <h3>Clock in</h3>
+            <h3>Einstempeln</h3>
             <p>Starte deine Schicht, schnapp dir einen Laptop und geh an die Telefone.</p>
           </article>
           <article class="card reveal hover-target" style="transition-delay: 0.1s;">
             <div class="number">02</div>
-            <h3>Take the call</h3>
+            <h3>Call annehmen</h3>
             <p>Rede mit freundlichen, nervösen, misstrauischen, wütenden oder verwirrten Callern.</p>
           </article>
           <article class="card reveal hover-target" style="transition-delay: 0.2s;">
             <div class="number">03</div>
-            <h3>Hit the goal</h3>
+            <h3>Ziel erreichen</h3>
             <p>Erreiche dein Tagesziel, bevor die Zeit abläuft. Danach kannst du ausstempeln.</p>
           </article>
         </div>
@@ -356,7 +369,7 @@
         <div class="section-head reveal">
           <div>
             <div class="section-kicker">Caller Studio</div>
-            <h2>WHO'S<br>CALLING?</h2>
+            <h2>WER RUFT<br>AN?</h2>
           </div>
           <p class="section-desc">
             Nicht jeder Caller reagiert gleich. Jeder Anruf kann anders laufen.
@@ -365,27 +378,27 @@
 
         <div class="grid-3">
           <article class="card caller reveal hover-target">
-            <span class="caller-tag">01 / friendly</span>
+            <span class="caller-tag">01 / freundlich</span>
             <h3>Der Freundliche</h3>
             <p>Er klingt entspannt. Vielleicht ein bisschen zu entspannt.</p>
           </article>
           <article class="card caller reveal hover-target" style="transition-delay: 0.1s;">
-            <span class="caller-tag">02 / suspicious</span>
+            <span class="caller-tag">02 / misstrauisch</span>
             <h3>Der Misstrauische</h3>
             <p>Er stellt Fragen. Viele Fragen.</p>
           </article>
           <article class="card caller reveal hover-target" style="transition-delay: 0.2s;">
-            <span class="caller-tag">03 / angry</span>
+            <span class="caller-tag">03 / wütend</span>
             <h3>Der Wütende</h3>
             <p>Dieser Call könnte sehr schnell sehr laut werden.</p>
           </article>
           <article class="card caller reveal hover-target">
-            <span class="caller-tag">04 / nervous</span>
+            <span class="caller-tag">04 / nervös</span>
             <h3>Der Nervöse</h3>
             <p>Du musst erstmal Vertrauen aufbauen.</p>
           </article>
           <article class="card caller reveal hover-target" style="transition-delay: 0.1s;">
-            <span class="caller-tag">05 / confused</span>
+            <span class="caller-tag">05 / verwirrt</span>
             <h3>Der Verwirrte</h3>
             <p>Was wollte er nochmal? Gute Frage.</p>
           </article>
@@ -398,8 +411,8 @@
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <div class="section-kicker">Inside the office</div>
-            <h2>MORE THAN<br>JUST CALLS.</h2>
+            <div class="section-kicker">Im Büro</div>
+            <h2>MEHR ALS<br>NUR CALLS.</h2>
           </div>
           <p class="section-desc">
             Wenn gerade niemand anruft, gibt es im Büro genug Unsinn zu machen.
@@ -408,7 +421,7 @@
 
         <div class="features">
           <article class="feature reveal hover-target">
-            <strong>💻 Work the phones</strong>
+            <strong>💻 Anrufe abarbeiten</strong>
             <p>Arbeite deine Calls ab, baue Vertrauen auf und versuche, dein Tagesziel zu schaffen.</p>
           </article>
           <article class="feature reveal hover-target" style="transition-delay: 0.1s;">
@@ -416,12 +429,12 @@
             <p>Spiele alleine oder bring deine Freunde mit ins Callcenter.</p>
           </article>
           <article class="feature reveal hover-target">
-            <strong>📄 Office Chaos</strong>
+            <strong>📄 Büro-Chaos</strong>
             <p>Wirf Papierbälle, ärgere deine Kollegen und mach das Büro ein bisschen weniger professionell.</p>
           </article>
           <article class="feature reveal hover-target" style="transition-delay: 0.1s;">
-            <strong>🚨 Watch out for the boss</strong>
-            <p>Ranjid will NUMBERS. Zu viele Beschwerden können außerdem sehr schnell unangenehm werden.</p>
+            <strong>🚨 Pass auf den Chef auf</strong>
+            <p>Ranjid will ZAHLEN. Zu viele Beschwerden können außerdem sehr schnell unangenehm werden.</p>
           </article>
         </div>
       </div>
@@ -431,20 +444,18 @@
     <section id="community">
       <div class="container">
         <div class="cta reveal">
-          <div class="section-kicker">Join the chaos</div>
-          <h2>READY TO CLOCK IN?</h2>
+          <div class="section-kicker">Tritt dem Chaos bei</div>
+          <h2>BEREIT ZUM EINSTEMPELN?</h2>
           <p>
             SCAMMED ist eine fiktive Comedy-Simulation.
             Alle Namen, Nummern und Daten sind frei erfunden.
           </p>
 
           <div class="buttons" style="justify-content:center; margin-top: 40px;">
-            <!-- Roblox Button mit Sound & Icon -->
             <a class="btn btn-red hover-target roblox-click" href="https://www.roblox.com/share?code=0512fee003fe364c8d87b2164efbcc29&type=ExperienceDetails&stamp=1791438310755" target="_blank">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5.42 2.222 21.777 5.42l-3.197 16.357-16.358-3.198L5.42 2.222zM14.6 10.36l-3.805-.744-.744 3.805 3.804.743.745-3.804z"/></svg>
               PLAY ON ROBLOX
             </a>
-            <!-- Discord Button mit Sound & Icon -->
             <a class="btn btn-blurple hover-target discord-click" href="https://discord.gg/abaDCdpz6" target="_blank">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
               JOIN DISCORD
@@ -459,7 +470,7 @@
   <footer>
     <div class="container footer-inner">
       <div>© 2026 SCAMMED — CALL. CONVINCE. CLIMB.</div>
-      <div>Fictional comedy simulation. All names, numbers and data are imaginary.</div>
+      <div>Fiktive Comedy-Simulation. Alle Namen, Nummern und Daten sind frei erfunden.</div>
     </div>
   </footer>
 
@@ -487,7 +498,6 @@
       cursorDot.style.left = `${posX}px`;
       cursorDot.style.top = `${posY}px`;
       
-      // Kleines Delay für den äußeren Ring (sehr smoother Effekt)
       cursorOutline.animate({
         left: `${posX}px`,
         top: `${posY}px`
@@ -499,31 +509,28 @@
       target.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
     });
 
-    /* --- 3. LIVE PLAYER COUNTER (Fake Simulation) --- */
+    /* --- 3. LIVE PLAYER COUNTER --- */
     const playerCounter = document.getElementById('player-count');
-    let currentPlayers = Math.floor(Math.random() * (1500 - 400 + 1) + 400); // Startet zwischen 400 und 1500
+    let currentPlayers = Math.floor(Math.random() * (1200 - 800 + 1) + 800);
     
     setInterval(() => {
-      // Ändert sich alle paar Sekunden um +- 5 Spieler
       const change = Math.floor(Math.random() * 11) - 5; 
       currentPlayers += change;
-      if (currentPlayers < 100) currentPlayers = 100; // Min. 100
+      if (currentPlayers < 100) currentPlayers = 100;
       playerCounter.innerText = currentPlayers.toLocaleString('de-DE');
-    }, 4500); // Alle 4.5 Sekunden
+    }, 4500);
 
     /* --- 4. BUTTON SOUND EFFEKTE --- */
     const soundRoblox = document.getElementById('sound-roblox');
     const soundDiscord = document.getElementById('sound-discord');
 
-    // Roblox Button OOF Sound
     document.querySelectorAll('.roblox-click').forEach(btn => {
       btn.addEventListener('click', () => {
-        soundRoblox.currentTime = 0; // Sound zurücksetzen falls doppelt geklickt wird
+        soundRoblox.currentTime = 0;
         soundRoblox.play();
       });
     });
 
-    // Discord Button Join Sound
     document.querySelectorAll('.discord-click').forEach(btn => {
       btn.addEventListener('click', () => {
         soundDiscord.currentTime = 0;
