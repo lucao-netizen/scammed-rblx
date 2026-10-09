@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
@@ -6,7 +5,6 @@
   <meta name="theme-color" content="#080808">
   <meta name="description" content="SCAMMED – die fiktive Comedy-Callcenter-Simulation auf Roblox. CALL. CONVINCE. CLIMB.">
   <title>SCAMMED — CALL. CONVINCE. CLIMB.</title>
-
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
@@ -22,8 +20,9 @@
       --max: 1180px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; cursor: none; /* Custom Cursor */ }
     html { scroll-behavior: smooth; }
+    
     body {
       font-family: Inter, Arial, sans-serif;
       background:
@@ -34,8 +33,28 @@
       overflow-x: hidden;
     }
 
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
+    a, button { color: inherit; text-decoration: none; cursor: none; }
+    img, svg { display: block; max-width: 100%; }
+
+    /* CUSTOM CURSOR */
+    .cursor-dot {
+      width: 8px; height: 8px; background: var(--red);
+      border-radius: 50%; position: fixed; pointer-events: none;
+      z-index: 9999; transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s;
+    }
+    .cursor-outline {
+      width: 30px; height: 30px; border: 1px solid rgba(255, 48, 48, 0.5);
+      border-radius: 50%; position: fixed; pointer-events: none;
+      z-index: 9998; transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, background 0.2s;
+    }
+    .cursor-hover .cursor-dot { width: 0; height: 0; }
+    .cursor-hover .cursor-outline {
+      width: 50px; height: 50px;
+      background: rgba(255, 48, 48, 0.1);
+      border-color: var(--red);
+    }
 
     .container {
       width: min(100% - 32px, var(--max));
@@ -44,439 +63,212 @@
 
     /* NAV */
     nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 50;
-      background: rgba(7,7,7,.72);
-      border-bottom: 1px solid var(--line);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      background: rgba(7,7,7,.72); border-bottom: 1px solid var(--line);
       backdrop-filter: blur(14px);
     }
-
-    .nav-inner {
-      min-height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .logo {
-      font-size: 20px;
-      font-weight: 900;
-      letter-spacing: .08em;
-    }
-
+    .nav-inner { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .logo { font-size: 20px; font-weight: 900; letter-spacing: .08em; transition: 0.3s; }
+    .logo:hover { text-shadow: 0 0 15px rgba(255,48,48,0.5); }
     .logo span { color: var(--red); }
-
-    .nav-links {
-      display: flex;
-      gap: 24px;
-      align-items: center;
-      color: #c8c8c8;
-      font-size: 14px;
-      font-weight: 600;
+    .nav-links { display: flex; gap: 24px; align-items: center; color: #c8c8c8; font-size: 14px; font-weight: 600; }
+    .nav-links a { transition: 0.3s; position: relative; }
+    .nav-links a::after {
+      content: ''; position: absolute; width: 0; height: 2px;
+      bottom: -4px; left: 0; background-color: var(--red); transition: 0.3s;
     }
-
     .nav-links a:hover { color: white; }
-
-    .nav-btn {
-      background: var(--red);
-      color: white;
-      padding: 11px 16px;
-      border-radius: 9px;
-      font-weight: 800;
-      font-size: 13px;
-      box-shadow: 0 0 25px rgba(255,48,48,.18);
-      transition: .2s;
-    }
-
-    .nav-btn:hover { transform: translateY(-2px); }
+    .nav-links a:hover::after { width: 100%; }
 
     /* HERO */
-    .hero {
-      min-height: 100svh;
-      display: grid;
-      align-items: center;
-      padding: 110px 0 70px;
-      position: relative;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: linear-gradient(to bottom, transparent 60%, var(--bg) 100%);
-    }
-
+    .hero { min-height: 100svh; display: grid; align-items: center; padding: 110px 0 70px; position: relative; }
     .hero-card {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      min-height: 650px;
-      display: flex;
-      align-items: flex-end;
-      background: #111;
-      box-shadow: 0 25px 90px rgba(0,0,0,.55);
+      position: relative; overflow: hidden; border: 1px solid var(--line);
+      border-radius: 22px; min-height: 650px; display: flex; align-items: flex-end;
+      background: #111; box-shadow: 0 25px 90px rgba(0,0,0,.55);
     }
-
     .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.48) 45%, rgba(0,0,0,.08) 100%),
-        linear-gradient(0deg, rgba(0,0,0,.82), transparent 65%),
-        url("cover.jpg") center/cover no-repeat;
-      transform: scale(1.01);
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(0,0,0,.9) 0%, rgba(0,0,0,.6) 45%, rgba(0,0,0,.1) 100%),
+                  url("https://images.unsplash.com/photo-1549923746-c502d488b3ea?q=80&w=2071&auto=format&fit=crop") center/cover no-repeat;
+      transform: scale(1.02); transition: transform 5s ease;
     }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 650px;
-      padding: 56px;
+    .hero-card:hover::before { transform: scale(1.05); }
+    
+    .hero-content { position: relative; z-index: 2; max-width: 650px; padding: 56px; }
+    
+    .live-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(0, 255, 0, 0.3);
+      color: #00ff00; padding: 6px 12px; border-radius: 999px;
+      font-size: 12px; font-weight: 700; margin-bottom: 15px;
+      backdrop-filter: blur(5px);
     }
+    .live-dot { width: 8px; height: 8px; background: #00ff00; border-radius: 50%; box-shadow: 0 0 10px #00ff00; animation: pulse-green 1.5s infinite; }
+    @keyframes pulse-green { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } 100% { opacity: 1; transform: scale(1); } }
 
     .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid rgba(255,48,48,.35);
-      background: rgba(255,48,48,.08);
-      color: #ff6a6a;
-      padding: 8px 11px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      margin-bottom: 18px;
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(255,48,48,.35); background: rgba(255,48,48,.08);
+      color: #ff6a6a; padding: 8px 11px; border-radius: 999px;
+      font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 18px;
     }
-
-    .eyebrow::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--red);
-      box-shadow: 0 0 12px var(--red);
-    }
-
-    h1 {
-      font-size: clamp(54px, 9vw, 110px);
-      line-height: .82;
-      letter-spacing: -.065em;
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
+    h1 { font-size: clamp(54px, 9vw, 110px); line-height: .82; letter-spacing: -.065em; font-weight: 900; text-transform: uppercase; text-shadow: 0 10px 30px rgba(0,0,0,0.8); }
     h1 span { color: var(--red); }
-
-    .hero-sub {
-      margin-top: 22px;
-      color: #d1d1d1;
-      max-width: 560px;
-      font-size: clamp(15px, 2vw, 19px);
-      line-height: 1.65;
-    }
-
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 30px;
-    }
-
+    .hero-sub { margin-top: 22px; color: #d1d1d1; max-width: 560px; font-size: clamp(15px, 2vw, 19px); line-height: 1.65; }
+    
+    .buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
     .btn {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 48px;
-      padding: 0 19px;
-      border-radius: 10px;
-      font-weight: 800;
-      font-size: 14px;
-      transition: .2s ease;
+      display: inline-flex; justify-content: center; align-items: center; gap: 10px;
+      min-height: 48px; padding: 0 24px; border-radius: 10px;
+      font-weight: 800; font-size: 14px; transition: all .3s ease; text-transform: uppercase; letter-spacing: 0.05em;
     }
+    .btn svg { width: 20px; height: 20px; fill: currentColor; }
 
-    .btn-red {
-      background: var(--red);
-      box-shadow: 0 0 28px rgba(255,48,48,.20);
-    }
+    /* ROBLOX BUTTON */
+    .btn-red { background: var(--red); box-shadow: 0 0 20px rgba(255,48,48,.3); border: 1px solid transparent; }
+    .btn-red:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 35px rgba(255,48,48,.5); background: #ff4040; border: 1px solid #ff7070; }
+    
+    /* DISCORD BUTTON */
+    .btn-blurple { background: #5865F2; box-shadow: 0 0 20px rgba(88, 101, 242, 0.3); color: white; border: 1px solid transparent; }
+    .btn-blurple:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 35px rgba(88, 101, 242, 0.5); background: #6974f5; }
 
-    .btn-red:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,48,48,.22); }
+    .btn-dark { border: 1px solid var(--line); background: rgba(255,255,255,.06); backdrop-filter: blur(10px); }
+    .btn-dark:hover { background: rgba(255,255,255,.1); transform: translateY(-3px); }
 
-    .btn-dark {
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.06);
-    }
-
-    .btn-dark:hover { background: rgba(255,255,255,.1); }
+    /* TICKER TAPE */
+    .ticker-wrap { width: 100%; overflow: hidden; background: var(--red); padding: 10px 0; border-top: 1px solid #ff6a6a; border-bottom: 1px solid #ff6a6a; transform: rotate(-1deg) scale(1.02); margin-top: -30px; position: relative; z-index: 10; }
+    .ticker { display: flex; white-space: nowrap; animation: ticker 20s linear infinite; font-weight: 900; font-size: 14px; letter-spacing: 0.1em; color: white; text-transform: uppercase; }
+    .ticker span { margin: 0 2vw; }
+    @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
 
     /* GENERAL */
     section { padding: 100px 0; }
-
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 30px;
-      margin-bottom: 38px;
-    }
-
-    .section-kicker {
-      color: var(--red);
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      font-size: clamp(34px, 6vw, 62px);
-      line-height: .95;
-      letter-spacing: -.045em;
-    }
-
-    .section-desc {
-      color: var(--muted);
-      max-width: 450px;
-      line-height: 1.65;
-      font-size: 14px;
-    }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 38px; }
+    .section-kicker { color: var(--red); font-size: 11px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 10px; }
+    h2 { font-size: clamp(34px, 6vw, 62px); line-height: .95; letter-spacing: -.045em; }
+    .section-desc { color: var(--muted); max-width: 450px; line-height: 1.65; font-size: 14px; }
 
     /* RULE */
     .rule {
-      border: 1px solid rgba(255,48,48,.28);
-      background: linear-gradient(135deg, rgba(255,48,48,.10), rgba(255,255,255,.025));
-      border-radius: 18px;
-      padding: 42px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+      border: 1px solid rgba(255,48,48,.28); background: linear-gradient(135deg, rgba(255,48,48,.10), rgba(255,255,255,.025));
+      border-radius: 18px; padding: 50px; text-align: center; position: relative; overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,48,48,0.05);
     }
+    .rule::before { content: "01"; position: absolute; right: -10px; top: -30px; font-size: 180px; font-weight: 900; color: rgba(255,255,255,.03); pointer-events: none; }
+    .rule small { color: #ff6666; font-weight: 900; letter-spacing: .16em; font-size: 11px; }
+    .rule p { margin: 15px auto 0; max-width: 650px; color: var(--muted); line-height: 1.7; }
 
-    .rule::before {
-      content: "01";
-      position: absolute;
-      right: 20px;
-      top: -25px;
-      font-size: 150px;
-      font-weight: 900;
-      color: rgba(255,255,255,.025);
-    }
-
-    .rule small {
-      color: #ff6666;
-      font-weight: 900;
-      letter-spacing: .16em;
-      font-size: 11px;
-    }
-
-    .rule h2 { margin-top: 10px; }
-    .rule p {
-      margin: 15px auto 0;
-      max-width: 650px;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    /* STEPS */
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
+    /* CARDS */
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
     .card {
-      background: linear-gradient(145deg, #121212, #0c0c0c);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 27px;
-      transition: .25s;
+      background: linear-gradient(145deg, #121212, #080808); border: 1px solid var(--line);
+      border-radius: 16px; padding: 30px; transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative; overflow: hidden;
     }
-
-    .card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(255,48,48,.3);
+    .card::after {
+      content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
+      transform: skewX(-20deg); transition: 0.5s;
     }
+    .card:hover { transform: translateY(-8px); border-color: rgba(255,48,48,.5); box-shadow: 0 15px 30px rgba(255,48,48,.1); }
+    .card:hover::after { left: 150%; }
 
     .number {
-      width: 38px;
-      height: 38px;
-      border-radius: 9px;
-      display: grid;
-      place-items: center;
-      background: rgba(255,48,48,.11);
-      color: var(--red);
-      font-weight: 900;
-      font-size: 13px;
-      margin-bottom: 30px;
+      width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center;
+      background: rgba(255,48,48,.15); color: var(--red); font-weight: 900; font-size: 14px; margin-bottom: 30px;
+      box-shadow: 0 0 15px rgba(255,48,48,0.2);
     }
-
-    .card h3 { font-size: 20px; margin-bottom: 9px; }
+    .card h3 { font-size: 22px; margin-bottom: 9px; font-weight: 800; }
     .card p { color: var(--muted); line-height: 1.65; font-size: 14px; }
 
-    /* CALLERS */
-    .caller {
-      min-height: 230px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .caller-tag {
-      color: #aaa;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      font-weight: 800;
-    }
-
-    .caller h3 { margin-top: 20px; }
+    .caller { min-height: 230px; display: flex; flex-direction: column; justify-content: space-between; }
+    .caller-tag { color: #aaa; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; font-weight: 800; display: inline-block; background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 5px; width: fit-content; }
+    .caller:hover .caller-tag { color: var(--red); background: rgba(255,48,48,0.1); }
 
     /* FEATURES */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-
-    .feature {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 27px;
-      background: #0e0e0e;
-    }
-
-    .feature strong {
-      display: block;
-      font-size: 18px;
-      margin-bottom: 9px;
-    }
-
-    .feature p {
-      color: var(--muted);
-      line-height: 1.65;
-      font-size: 14px;
-    }
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+    .feature { border: 1px solid var(--line); border-radius: 16px; padding: 30px; background: #0e0e0e; transition: 0.3s; }
+    .feature:hover { border-color: #444; background: #151515; transform: scale(1.02); }
+    .feature strong { display: block; font-size: 18px; margin-bottom: 9px; color: #fff; }
 
     /* CTA */
     .cta {
-      text-align: center;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 70px 24px;
-      background:
-        radial-gradient(circle at center, rgba(255,48,48,.14), transparent 55%),
-        #0c0c0c;
+      text-align: center; border: 1px solid var(--line); border-radius: 22px; padding: 80px 24px;
+      background: radial-gradient(circle at center, rgba(255,48,48,.15), transparent 60%), #0c0c0c;
+      position: relative; overflow: hidden;
     }
-
     .cta h2 { max-width: 800px; margin: auto; }
-    .cta p {
-      color: var(--muted);
-      margin: 17px auto 0;
-      max-width: 560px;
-      line-height: 1.65;
-    }
+    .cta p { color: var(--muted); margin: 17px auto 0; max-width: 560px; line-height: 1.65; }
 
-    footer {
-      padding: 30px 0 40px;
-      color: #666;
-      font-size: 12px;
-      border-top: 1px solid var(--line);
-    }
+    footer { padding: 30px 0 40px; color: #666; font-size: 12px; border-top: 1px solid var(--line); }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; align-items: center; }
 
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      align-items: center;
-    }
-
-    /* REVEAL */
-    .reveal {
-      opacity: 0;
-      transform: translateY(25px);
-      transition: opacity .7s ease, transform .7s ease;
-    }
-
-    .reveal.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    /* REVEAL ANIMATIONS */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity .8s ease, transform .8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+    .reveal.show { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 800px) {
       .nav-links { display: none; }
-      .nav-inner { min-height: 62px; }
-
       .hero { padding-top: 88px; }
-      .hero-card { min-height: 620px; border-radius: 16px; }
-      .hero-card::before {
-        background:
-          linear-gradient(0deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.35) 72%),
-          url("cover.jpg") center/cover no-repeat;
-      }
-
-      .hero-content { padding: 28px; }
-      .hero-sub { font-size: 14px; }
-
-      section { padding: 72px 0; }
+      .hero-card { min-height: 580px; border-radius: 16px; }
+      .hero-content { padding: 30px; }
+      section { padding: 70px 0; }
       .section-head { display: block; }
       .section-desc { margin-top: 15px; }
-
-      .grid-3,
-      .features { grid-template-columns: 1fr; }
-
       .rule { padding: 32px 22px; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
+      .cursor-dot, .cursor-outline { display: none; /* Keine Custom Cursor am Handy */ }
+      * { cursor: auto; }
     }
-
     @media (max-width: 430px) {
-      .container { width: min(100% - 20px, var(--max)); }
-      .nav-btn { padding: 9px 12px; font-size: 12px; }
-      .hero-card { min-height: 570px; }
-      h1 { font-size: 62px; }
+      .hero-card { min-height: 520px; }
+      h1 { font-size: 52px; }
       .buttons { flex-direction: column; }
       .btn { width: 100%; }
     }
   </style>
 </head>
-
 <body>
 
+  <!-- AUDIO FILES (Versteckt, werden per JS abgerufen) -->
+  <audio id="sound-roblox" src="https://www.myinstants.com/media/sounds/roblox-death-sound_1.mp3" preload="auto"></audio>
+  <audio id="sound-discord" src="https://www.myinstants.com/media/sounds/discord-join.mp3" preload="auto"></audio>
+
+  <!-- CUSTOM CURSOR -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+
+  <!-- NAVIGATION -->
   <nav>
     <div class="container nav-inner">
-      <a href="#" class="logo">SCAM<span>MED</span></a>
-
+      <a href="#" class="logo hover-target">SCAM<span>MED</span></a>
       <div class="nav-links">
-        <a href="#how">Gameplay</a>
-        <a href="#callers">Callers</a>
-        <a href="#features">Features</a>
-        <a href="#community">Community</a>
+        <a href="#how" class="hover-target">Gameplay</a>
+        <a href="#callers" class="hover-target">Callers</a>
+        <a href="#features" class="hover-target">Features</a>
+        <a href="#community" class="hover-target">Community</a>
       </div>
-
-      <a class="nav-btn" href="https://www.roblox.com/share?code=0512fee003fe364c8d87b2164efbcc29&type=ExperienceDetails&stamp=1791438310755" target="_blank">
+      <a class="nav-btn btn-red hover-target roblox-click" href="https://www.roblox.com/share?code=0512fee003fe364c8d87b2164efbcc29&type=ExperienceDetails&stamp=1791438310755" target="_blank">
         PLAY ON ROBLOX
       </a>
     </div>
   </nav>
 
   <main>
-
+    
+    <!-- HERO SECTION -->
     <section class="hero">
       <div class="container">
         <div class="hero-card">
           <div class="hero-content">
+            <div class="live-badge">
+              <div class="live-dot"></div>
+              <span id="player-count">482</span> Players In-Game
+            </div>
+
             <div class="eyebrow">Fictional comedy simulation</div>
-
             <h1>SCAM<span>MED</span></h1>
-
             <p class="hero-sub">
               Willkommen im Callcenter, in dem Vertrauen unser Produkt ist.
               Nimm Anrufe an, überzeuge deine Caller und erreiche dein Tagesziel,
@@ -484,16 +276,33 @@
             </p>
 
             <div class="buttons">
-              <a class="btn btn-red" href="https://www.roblox.com/share?code=0512fee003fe364c8d87b2164efbcc29&type=ExperienceDetails&stamp=1791438310755" target="_blank">
-                ▶ JETZT SPIELEN
+              <!-- Roblox Button mit Sound & Icon -->
+              <a class="btn btn-red hover-target roblox-click" href="https://www.roblox.com/share?code=0512fee003fe364c8d87b2164efbcc29&type=ExperienceDetails&stamp=1791438310755" target="_blank">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5.42 2.222 21.777 5.42l-3.197 16.357-16.358-3.198L5.42 2.222zM14.6 10.36l-3.805-.744-.744 3.805 3.804.743.745-3.804z"/></svg>
+                JETZT SPIELEN
               </a>
-              <a class="btn btn-dark" href="#how">SO FUNKTIONIERT'S ↓</a>
+              <a class="btn btn-dark hover-target" href="#how">SO FUNKTIONIERT'S ↓</a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- TICKER TAPE -->
+    <div class="ticker-wrap">
+      <div class="ticker">
+        <span>+++ UPDATE: NEW CALLERS ADDED +++</span>
+        <span>DON'T LET THEM REDEEM IT</span>
+        <span>+++ REACH YOUR QUOTA +++</span>
+        <span>BEWARE OF THE POLICE</span>
+        <span>+++ UPDATE: NEW CALLERS ADDED +++</span>
+        <span>DON'T LET THEM REDEEM IT</span>
+        <span>+++ REACH YOUR QUOTA +++</span>
+        <span>BEWARE OF THE POLICE</span>
+      </div>
+    </div>
+
+    <!-- RULE SECTION -->
     <section>
       <div class="container">
         <div class="rule reveal">
@@ -507,6 +316,7 @@
       </div>
     </section>
 
+    <!-- GAMEPLAY SECTION -->
     <section id="how">
       <div class="container">
         <div class="section-head reveal">
@@ -521,19 +331,17 @@
         </div>
 
         <div class="grid-3">
-          <article class="card reveal">
+          <article class="card reveal hover-target">
             <div class="number">01</div>
             <h3>Clock in</h3>
             <p>Starte deine Schicht, schnapp dir einen Laptop und geh an die Telefone.</p>
           </article>
-
-          <article class="card reveal">
+          <article class="card reveal hover-target" style="transition-delay: 0.1s;">
             <div class="number">02</div>
             <h3>Take the call</h3>
             <p>Rede mit freundlichen, nervösen, misstrauischen, wütenden oder verwirrten Callern.</p>
           </article>
-
-          <article class="card reveal">
+          <article class="card reveal hover-target" style="transition-delay: 0.2s;">
             <div class="number">03</div>
             <h3>Hit the goal</h3>
             <p>Erreiche dein Tagesziel, bevor die Zeit abläuft. Danach kannst du ausstempeln.</p>
@@ -542,6 +350,7 @@
       </div>
     </section>
 
+    <!-- CALLERS SECTION -->
     <section id="callers">
       <div class="container">
         <div class="section-head reveal">
@@ -555,36 +364,36 @@
         </div>
 
         <div class="grid-3">
-          <article class="card caller reveal">
+          <article class="card caller reveal hover-target">
             <span class="caller-tag">01 / friendly</span>
             <h3>Der Freundliche</h3>
             <p>Er klingt entspannt. Vielleicht ein bisschen zu entspannt.</p>
           </article>
-
-          <article class="card caller reveal">
+          <article class="card caller reveal hover-target" style="transition-delay: 0.1s;">
             <span class="caller-tag">02 / suspicious</span>
             <h3>Der Misstrauische</h3>
             <p>Er stellt Fragen. Viele Fragen.</p>
           </article>
-
-          <article class="card caller reveal">
+          <article class="card caller reveal hover-target" style="transition-delay: 0.2s;">
             <span class="caller-tag">03 / angry</span>
             <h3>Der Wütende</h3>
             <p>Dieser Call könnte sehr schnell sehr laut werden.</p>
           </article>
-
-          <article class="card caller reveal">
+          <article class="card caller reveal hover-target">
             <span class="caller-tag">04 / nervous</span>
             <h3>Der Nervöse</h3>
             <p>Du musst erstmal Vertrauen aufbauen.</p>
           </article>
-
-          <article class="card caller reveal">
+          <article class="card caller reveal hover-target" style="transition-delay: 0.1s;">
             <span class="caller-tag">05 / confused</span>
             <h3>Der Verwirrte</h3>
             <p>Was wollte er nochmal? Gute Frage.</p>
           </article>
+        </div>
+      </div>
+    </section>
 
+    <!-- FEATURES SECTION -->
     <section id="features">
       <div class="container">
         <div class="section-head reveal">
@@ -598,22 +407,19 @@
         </div>
 
         <div class="features">
-          <article class="feature reveal">
+          <article class="feature reveal hover-target">
             <strong>💻 Work the phones</strong>
             <p>Arbeite deine Calls ab, baue Vertrauen auf und versuche, dein Tagesziel zu schaffen.</p>
           </article>
-
-          <article class="feature reveal">
+          <article class="feature reveal hover-target" style="transition-delay: 0.1s;">
             <strong>👥 Solo oder mit Freunden</strong>
             <p>Spiele alleine oder bring deine Freunde mit ins Callcenter.</p>
           </article>
-
-          <article class="feature reveal">
+          <article class="feature reveal hover-target">
             <strong>📄 Office Chaos</strong>
             <p>Wirf Papierbälle, ärgere deine Kollegen und mach das Büro ein bisschen weniger professionell.</p>
           </article>
-
-          <article class="feature reveal">
+          <article class="feature reveal hover-target" style="transition-delay: 0.1s;">
             <strong>🚨 Watch out for the boss</strong>
             <p>Ranjid will NUMBERS. Zu viele Beschwerden können außerdem sehr schnell unangenehm werden.</p>
           </article>
@@ -621,6 +427,7 @@
       </div>
     </section>
 
+    <!-- COMMUNITY CTA SECTION -->
     <section id="community">
       <div class="container">
         <div class="cta reveal">
@@ -631,11 +438,15 @@
             Alle Namen, Nummern und Daten sind frei erfunden.
           </p>
 
-          <div class="buttons" style="justify-content:center;">
-            <a class="btn btn-red" href="https://www.roblox.com/share?code=0512fee003fe364c8d87b2164efbcc29&type=ExperienceDetails&stamp=1791438310755" target="_blank">
+          <div class="buttons" style="justify-content:center; margin-top: 40px;">
+            <!-- Roblox Button mit Sound & Icon -->
+            <a class="btn btn-red hover-target roblox-click" href="https://www.roblox.com/share?code=0512fee003fe364c8d87b2164efbcc29&type=ExperienceDetails&stamp=1791438310755" target="_blank">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5.42 2.222 21.777 5.42l-3.197 16.357-16.358-3.198L5.42 2.222zM14.6 10.36l-3.805-.744-.744 3.805 3.804.743.745-3.804z"/></svg>
               PLAY ON ROBLOX
             </a>
-            <a class="btn btn-dark" href="https://discord.gg/abaDCdpz6" target="_blank">
+            <!-- Discord Button mit Sound & Icon -->
+            <a class="btn btn-blurple hover-target discord-click" href="https://discord.gg/abaDCdpz6" target="_blank">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
               JOIN DISCORD
             </a>
           </div>
@@ -653,6 +464,7 @@
   </footer>
 
   <script>
+    /* --- 1. SCROLL REVEAL ANIMATION --- */
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -661,9 +473,64 @@
         }
       });
     }, { threshold: 0.12 });
-
     document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
-  </script>
 
+    /* --- 2. CUSTOM CURSOR LOGIC --- */
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
+    const hoverTargets = document.querySelectorAll('.hover-target, a, button, .card');
+
+    window.addEventListener('mousemove', (e) => {
+      const posX = e.clientX;
+      const posY = e.clientY;
+      
+      cursorDot.style.left = `${posX}px`;
+      cursorDot.style.top = `${posY}px`;
+      
+      // Kleines Delay für den äußeren Ring (sehr smoother Effekt)
+      cursorOutline.animate({
+        left: `${posX}px`,
+        top: `${posY}px`
+      }, { duration: 250, fill: "forwards" });
+    });
+
+    hoverTargets.forEach(target => {
+      target.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      target.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+
+    /* --- 3. LIVE PLAYER COUNTER (Fake Simulation) --- */
+    const playerCounter = document.getElementById('player-count');
+    let currentPlayers = Math.floor(Math.random() * (1500 - 400 + 1) + 400); // Startet zwischen 400 und 1500
+    
+    setInterval(() => {
+      // Ändert sich alle paar Sekunden um +- 5 Spieler
+      const change = Math.floor(Math.random() * 11) - 5; 
+      currentPlayers += change;
+      if (currentPlayers < 100) currentPlayers = 100; // Min. 100
+      playerCounter.innerText = currentPlayers.toLocaleString('de-DE');
+    }, 4500); // Alle 4.5 Sekunden
+
+    /* --- 4. BUTTON SOUND EFFEKTE --- */
+    const soundRoblox = document.getElementById('sound-roblox');
+    const soundDiscord = document.getElementById('sound-discord');
+
+    // Roblox Button OOF Sound
+    document.querySelectorAll('.roblox-click').forEach(btn => {
+      btn.addEventListener('click', () => {
+        soundRoblox.currentTime = 0; // Sound zurücksetzen falls doppelt geklickt wird
+        soundRoblox.play();
+      });
+    });
+
+    // Discord Button Join Sound
+    document.querySelectorAll('.discord-click').forEach(btn => {
+      btn.addEventListener('click', () => {
+        soundDiscord.currentTime = 0;
+        soundDiscord.play();
+      });
+    });
+  </script>
 </body>
 </html>
+
