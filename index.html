@@ -508,10 +508,6 @@
       target.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
       target.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
     });
-
-    /* --- 3. LIVE PLAYER COUNTER --- */
-    const playerCounter = document.getElementById('player-count');
-    let currentPlayers = Math.floor(Math.random() * (1200 - 800 + 1) + 800);
     
     setInterval(() => {
       const change = Math.floor(Math.random() * 11) - 5; 
