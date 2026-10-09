@@ -136,6 +136,9 @@
     .btn-blurple { background: #5865F2; box-shadow: 0 0 20px rgba(88, 101, 242, 0.3); color: white; border: 1px solid transparent; }
     .btn-blurple:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 35px rgba(88, 101, 242, 0.5); background: #6974f5; }
 
+    .btn-tiktok { background: #000000; border: 1px solid rgba(255, 255, 255, 0.2); color: white; box-shadow: 0 0 20px rgba(254, 44, 85, 0.2); }
+    .btn-tiktok:hover { transform: translateY(-3px) scale(1.02); border-color: #fe2c55; box-shadow: 0 10px 25px rgba(254, 44, 85, 0.4); }
+
     .btn-dark { border: 1px solid var(--line); background: rgba(255,255,255,.06); backdrop-filter: blur(10px); color: white; }
     .btn-dark:hover { background: rgba(255,255,255,.1); transform: translateY(-3px); }
 
@@ -151,6 +154,57 @@
     .section-kicker { color: var(--red); font-size: 11px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 10px; }
     h2 { font-size: clamp(34px, 6vw, 62px); line-height: .95; letter-spacing: -.045em; }
     .section-desc { color: var(--muted); max-width: 450px; line-height: 1.65; font-size: 14px; }
+
+    /* UPDATE COMING SOON SECTION */
+    .update-card {
+      background: linear-gradient(135deg, rgba(255, 48, 48, 0.12) 0%, rgba(16, 16, 16, 0.95) 100%);
+      border: 1px solid rgba(255, 48, 48, 0.4);
+      border-radius: 22px;
+      padding: 50px 40px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 50px rgba(255, 48, 48, 0.15);
+      transition: 0.3s;
+    }
+    .update-card:hover { border-color: rgba(255, 48, 48, 0.7); box-shadow: 0 0 60px rgba(255, 48, 48, 0.25); }
+    .update-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--red);
+      color: white;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px rgba(255, 48, 48, 0.5);
+    }
+    .update-card h2 { font-size: clamp(32px, 5vw, 54px); margin-bottom: 12px; }
+    .update-card h2 span { color: var(--red); }
+    .update-sub { color: var(--muted); font-size: 16px; max-width: 600px; margin-bottom: 35px; line-height: 1.6; }
+    
+    .update-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .update-feat {
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 20px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: 0.3s;
+    }
+    .update-feat:hover { background: rgba(255, 48, 48, 0.06); border-color: rgba(255, 48, 48, 0.2); }
+    .update-icon { font-size: 28px; line-height: 1; }
+    .update-feat strong { display: block; font-size: 16px; margin-bottom: 4px; color: #fff; }
+    .update-feat p { color: var(--muted); font-size: 13px; line-height: 1.5; }
 
     /* RULE */
     .rule {
@@ -220,6 +274,7 @@
       section { padding: 70px 0; }
       .section-head { display: block; }
       .section-desc { margin-top: 15px; }
+      .update-card { padding: 35px 22px; }
       .rule { padding: 32px 22px; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
       .cursor-dot, .cursor-outline { display: none; }
@@ -248,10 +303,12 @@
     <div class="container nav-inner">
       <a href="#" class="logo hover-target">SCAM<span>MED</span></a>
       <div class="nav-links">
+        <a href="#update" class="hover-target">Update</a>
         <a href="#how" class="hover-target">Gameplay</a>
         <a href="#callers" class="hover-target">Callers</a>
         <a href="#features" class="hover-target">Features</a>
         <a href="#community" class="hover-target">Community</a>
+        <a href="https://www.tiktok.com/@Packagesim" target="_blank" class="hover-target">TikTok</a>
       </div>
       <a class="nav-btn btn-red hover-target roblox-click" href="https://www.roblox.com/share?code=0512fee003fe364c8d87b2164efbcc29&type=ExperienceDetails&stamp=1791438310755" target="_blank">
         PLAY ON ROBLOX
@@ -289,16 +346,51 @@
     <!-- TICKER TAPE -->
     <div class="ticker-wrap">
       <div class="ticker">
-        <span>+++ UPDATE: NEUE CALLER HINZUGEFÜGT +++</span>
+        <span>+++ UPDATE COMING SOON +++</span>
         <span>DON'T LET THEM REDEEM IT</span>
         <span>+++ ERREICHE DEIN TAGESZIEL +++</span>
         <span>PASS AUF DIE POLIZEI AUF</span>
-        <span>+++ UPDATE: NEUE CALLER HINZUGEFÜGT +++</span>
+        <span>+++ UPDATE COMING SOON +++</span>
         <span>DON'T LET THEM REDEEM IT</span>
         <span>+++ ERREICHE DEIN TAGESZIEL +++</span>
         <span>PASS AUF DIE POLIZEI AUF</span>
       </div>
     </div>
+
+    <!-- UPDATE COMING SOON SECTION -->
+    <section id="update">
+      <div class="container">
+        <div class="update-card reveal hover-target">
+          <div class="update-badge">⚡ demnächst verfügbar</div>
+          <h2>GROSSES UPDATE<br><span>COMING SOON</span></h2>
+          <p class="update-sub">Wir arbeiten an neuen Inhalten für SCAMMED! Mach dich bereit auf noch mehr Chaos im Callcenter.</p>
+          
+          <div class="update-features">
+            <div class="update-feat">
+              <span class="update-icon">📞</span>
+              <div>
+                <strong>Neue Caller-Typen</strong>
+                <p>Noch verrücktere Stimmen und unerwartete Reaktionen am Telefon.</p>
+              </div>
+            </div>
+            <div class="update-feat">
+              <span class="update-icon">🚨</span>
+              <div>
+                <strong>Razzia-Events</strong>
+                <p>Überlebe den Polizei-Überfall, wenn zu viele Beschwerden eingehen.</p>
+              </div>
+            </div>
+            <div class="update-feat">
+              <span class="update-icon">🏆</span>
+              <div>
+                <strong>Büro-Upgrades</strong>
+                <p>Schalte neue Laptops, Deko und Spezial-Items frei.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- RULE SECTION -->
     <section>
@@ -444,6 +536,10 @@
             <a class="btn btn-blurple hover-target discord-click" href="https://discord.gg/abaDCdpz6" target="_blank">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
               JOIN DISCORD
+            </a>
+            <a class="btn btn-tiktok hover-target" href="https://www.tiktok.com/@Packagesim" target="_blank">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68a6.34 6.34 0 0 0 10.86 4.48 6.27 6.27 0 0 0 1.86-4.48V8.69a8.18 8.18 0 0 0 4.87 1.6v-3.6a4.87 4.87 0 0 1-1-.05z"/></svg>
+              TIKTOK
             </a>
           </div>
         </div>
