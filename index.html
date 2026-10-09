@@ -290,9 +290,9 @@
 </head>
 <body>
 
-  <!-- AUDIO FILES -->
-  <audio id="sound-roblox" src="https://www.myinstants.com/media/sounds/roblox-death-sound_1.mp3" preload="auto"></audio>
-  <audio id="sound-discord" src="https://www.myinstants.com/media/sounds/discord-join.mp3" preload="auto"></audio>
+  <!-- LIZENZFREIE AUDIO-DATEIEN (ROYALTY FREE AUDIO) -->
+  <audio id="sound-roblox" src="https://actions.google.com/sounds/v1/cartoon/pop.ogg" preload="auto"></audio>
+  <audio id="sound-discord" src="https://actions.google.com/sounds/v1/ui/beep.ogg" preload="auto"></audio>
 
   <!-- CUSTOM CURSOR -->
   <div class="cursor-dot"></div>
@@ -590,23 +590,24 @@
       target.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
     });
 
-    /* --- 3. BUTTON SOUND EFFEKTE --- */
+    /* --- 3. BUTTON SOUND EFFEKTE (LIZENZFREI) --- */
     const soundRoblox = document.getElementById('sound-roblox');
     const soundDiscord = document.getElementById('sound-discord');
 
     document.querySelectorAll('.roblox-click').forEach(btn => {
       btn.addEventListener('click', () => {
         soundRoblox.currentTime = 0;
-        soundRoblox.play();
+        soundRoblox.play().catch(() => {});
       });
     });
 
     document.querySelectorAll('.discord-click').forEach(btn => {
       btn.addEventListener('click', () => {
         soundDiscord.currentTime = 0;
-        soundDiscord.play();
+        soundDiscord.play().catch(() => {});
       });
     });
   </script>
 </body>
 </html>
+
