@@ -107,16 +107,6 @@
 
     .hero-content { position: relative; z-index: 2; max-width: 650px; padding: 56px; }
 
-    .live-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(0, 255, 0, 0.35);
-      color: #00ff00; padding: 6px 12px; border-radius: 999px;
-      font-size: 12px; font-weight: 700; margin-bottom: 15px;
-      backdrop-filter: blur(6px);
-    }
-    .live-dot { width: 8px; height: 8px; background: #00ff00; border-radius: 50%; box-shadow: 0 0 10px #00ff00; animation: pulse-green 1.5s infinite; }
-    @keyframes pulse-green { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } 100% { opacity: 1; transform: scale(1); } }
-
     .eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
       border: 1px solid rgba(255,48,48,.35); background: rgba(255,48,48,.08);
@@ -276,11 +266,6 @@
       <div class="container">
         <div class="hero-card">
           <div class="hero-content">
-            <div class="live-badge">
-              <div class="live-dot"></div>
-              <span id="player-count">900</span> Spieler In-Game
-            </div>
-
             <div class="eyebrow">Fiktive Comedy-Simulation</div>
             <h1>SCAM<span>MED</span></h1>
             <p class="hero-sub">
@@ -508,15 +493,8 @@
       target.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
       target.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
     });
-    
-    setInterval(() => {
-      const change = Math.floor(Math.random() * 11) - 5; 
-      currentPlayers += change;
-      if (currentPlayers < 100) currentPlayers = 100;
-      playerCounter.innerText = currentPlayers.toLocaleString('de-DE');
-    }, 4500);
 
-    /* --- 4. BUTTON SOUND EFFEKTE --- */
+    /* --- 3. BUTTON SOUND EFFEKTE --- */
     const soundRoblox = document.getElementById('sound-roblox');
     const soundDiscord = document.getElementById('sound-discord');
 
@@ -536,4 +514,3 @@
   </script>
 </body>
 </html>
-
