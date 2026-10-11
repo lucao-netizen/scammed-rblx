@@ -255,4 +255,436 @@
       background: rgba(255,48,48,.15); color: var(--red); font-weight: 900; font-size: 14px; margin-bottom: 30px;
       box-shadow: 0 0 15px rgba(255,48,48,0.2);
     }
-    .card h3
+    .card h3 { font-size: 22px; margin-bottom: 9px; font-weight: 800; }
+    .card p { color: var(--muted); line-height: 1.65; font-size: 14px; }
+
+    .caller { min-height: 230px; display: flex; flex-direction: column; justify-content: space-between; }
+    .caller-tag { color: #aaa; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; font-weight: 800; display: inline-block; background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 5px; width: fit-content; }
+    .caller:hover .caller-tag { color: var(--red); background: rgba(255,48,48,0.1); }
+
+    /* FEATURES */
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+    .feature { border: 1px solid var(--line); border-radius: 16px; padding: 30px; background: #0e0e0e; transition: 0.3s; }
+    .feature:hover { border-color: #444; background: #151515; transform: scale(1.02); }
+    .feature strong { display: block; font-size: 18px; margin-bottom: 9px; color: #fff; }
+    .feature p { color: var(--muted); line-height: 1.65; font-size: 14px; }
+
+    /* CTA */
+    .cta {
+      text-align: center; border: 1px solid var(--line); border-radius: 22px; padding: 80px 24px;
+      background: radial-gradient(circle at center, rgba(255,48,48,.15), transparent 60%), #0c0c0c;
+      position: relative; overflow: hidden;
+    }
+    .cta h2 { max-width: 800px; margin: auto; }
+    .cta p { color: var(--muted); margin: 17px auto 0; max-width: 560px; line-height: 1.65; }
+
+    footer { padding: 30px 0 40px; color: #666; font-size: 12px; border-top: 1px solid var(--line); }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+
+    /* REVEAL ANIMATIONS */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity .8s ease, transform .8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+    .reveal.show { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 800px) {
+      .nav-links { display: none; }
+      .hero { padding-top: 88px; }
+      .hero-card { min-height: 580px; border-radius: 16px; }
+      .hero-content { padding: 30px; }
+      section { padding: 70px 0; }
+      .section-head { display: block; }
+      .section-desc { margin-top: 15px; }
+      .update-card { padding: 35px 22px; }
+      .rule { padding: 32px 22px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .cursor-dot, .cursor-outline { display: none; }
+      * { cursor: auto; }
+    }
+    @media (max-width: 430px) {
+      .hero-card { min-height: 520px; }
+      h1 { font-size: 52px; }
+      .buttons { flex-direction: column; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LIZENZFREIE AUDIO-DATEIEN (ROYALTY FREE AUDIO) -->
+  <audio id="sound-roblox" src="https://actions.google.com/sounds/v1/cartoon/pop.ogg" preload="auto"></audio>
+  <audio id="sound-discord" src="https://actions.google.com/sounds/v1/ui/beep.ogg" preload="auto"></audio>
+
+  <!-- CUSTOM CURSOR -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="#" class="logo hover-target">SCAM<span>MED</span></a>
+      <div class="nav-links">
+        <a href="#update" class="hover-target">Update</a>
+        <a href="#how" class="hover-target">Gameplay</a>
+        <a href="#callers" class="hover-target">Callers</a>
+        <a href="#features" class="hover-target">Features</a>
+        <a href="#community" class="hover-target">Community</a>
+        <a href="https://www.tiktok.com/@Packagesim" target="_blank" class="hover-target">TikTok</a>
+      </div>
+      <a class="nav-btn btn-red hover-target roblox-click" href="https://www.roblox.com/share?code=0512fee003fe364c8d87b2164efbcc29&type=ExperienceDetails&stamp=1791438310755" target="_blank">
+        PLAY ON ROBLOX
+      </a>
+    </div>
+  </nav>
+
+  <main>
+    
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="hero-content">
+            <div class="top-badges">
+              <div class="eyebrow">Fiktive Comedy-Simulation</div>
+              <div class="live-counter">
+                <span class="live-dot"></span>
+                <span id="player-count">Lädt Spieler...</span>
+              </div>
+            </div>
+
+            <h1>SCAM<span>MED</span></h1>
+            <p class="hero-sub">
+              Willkommen im Callcenter, in dem Vertrauen unser Produkt ist.
+              Nimm Anrufe an, überzeuge deine Caller und erreiche dein Tagesziel,
+              bevor die Zeit abläuft.
+            </p>
+
+            <div class="buttons">
+              <a class="btn btn-red hover-target roblox-click" href="https://www.roblox.com/share?code=0512fee003fe364c8d87b2164efbcc29&type=ExperienceDetails&stamp=1791438310755" target="_blank">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5.42 2.222 21.777 5.42l-3.197 16.357-16.358-3.198L5.42 2.222zM14.6 10.36l-3.805-.744-.744 3.805 3.804.743.745-3.804z"/></svg>
+                JETZT SPIELEN
+              </a>
+              <a class="btn btn-dark hover-target" href="#how">SO FUNKTIONIERT'S ↓</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TICKER TAPE -->
+    <div class="ticker-wrap">
+      <div class="ticker">
+        <span>+++ UPDATE COMING SOON +++</span>
+        <span>DON'T LET THEM REDEEM IT</span>
+        <span>+++ ERREICHE DEIN TAGESZIEL +++</span>
+        <span>PASS AUF DIE POLIZEI AUF</span>
+        <span>+++ UPDATE COMING SOON +++</span>
+        <span>DON'T LET THEM REDEEM IT</span>
+        <span>+++ ERREICHE DEIN TAGESZIEL +++</span>
+        <span>PASS AUF DIE POLIZEI AUF</span>
+      </div>
+    </div>
+
+    <!-- UPDATE COMING SOON SECTION -->
+    <section id="update">
+      <div class="container">
+        <div class="update-card reveal hover-target">
+          <div class="update-badge">⚡ demnächst verfügbar</div>
+          <h2>GROSSES UPDATE<br><span>COMING SOON</span></h2>
+          <p class="update-sub">Wir arbeiten an neuen Inhalten für SCAMMED! Mach dich bereit auf noch mehr Chaos im Callcenter.</p>
+          
+          <div class="update-features">
+            <div class="update-feat">
+              <span class="update-icon">📞</span>
+              <div>
+                <strong>Neue Caller-Typen</strong>
+                <p>Noch verrücktere Stimmen und unerwartete Reaktionen am Telefon.</p>
+              </div>
+            </div>
+            <div class="update-feat">
+              <span class="update-icon">🚨</span>
+              <div>
+                <strong>Razzia-Events</strong>
+                <p>Überlebe den Polizei-Überfall, wenn zu viele Beschwerden eingehen.</p>
+              </div>
+            </div>
+            <div class="update-feat">
+              <span class="update-icon">🏆</span>
+              <div>
+                <strong>Büro-Upgrades</strong>
+                <p>Schalte neue Laptops, Deko und Spezial-Items frei.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RULE SECTION -->
+    <section>
+      <div class="container">
+        <div class="rule reveal">
+          <small>REGEL #1</small>
+          <h2>DON'T LET THEM REDEEM IT.</h2>
+          <p>
+            Arbeite die Telefone ab, baue Vertrauen auf und schließe deine Calls.
+            Aber pass auf: Zu viele Beschwerden und die Polizei steht plötzlich im Büro.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GAMEPLAY SECTION -->
+    <section id="how">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">Gameplay</div>
+            <h2>CALL. CONVINCE.<br>CLIMB.</h2>
+          </div>
+          <p class="section-desc">
+            Dein Schichtablauf ist einfach. Das Chaos kommt von den Leuten,
+            die du am anderen Ende der Leitung bekommst.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card reveal hover-target">
+            <div class="number">01</div>
+            <h3>Einstempeln</h3>
+            <p>Starte deine Schicht, schnapp dir einen Laptop und geh an die Telefone.</p>
+          </article>
+          <article class="card reveal hover-target" style="transition-delay: 0.1s;">
+            <div class="number">02</div>
+            <h3>Call annehmen</h3>
+            <p>Rede mit freundlichen, nervösen, misstrauischen, wütenden oder verwirrten Callern.</p>
+          </article>
+          <article class="card reveal hover-target" style="transition-delay: 0.2s;">
+            <div class="number">03</div>
+            <h3>Ziel erreichen</h3>
+            <p>Erreiche dein Tagesziel, bevor die Zeit abläuft. Danach kannst du ausstempeln.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALLERS SECTION -->
+    <section id="callers">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">Caller Studio</div>
+            <h2>WER RUFT<br>AN?</h2>
+          </div>
+          <p class="section-desc">
+            Nicht jeder Caller reagiert gleich. Jeder Anruf kann anders laufen.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card caller reveal hover-target">
+            <span class="caller-tag">01 / freundlich</span>
+            <h3>Der Freundliche</h3>
+            <p>Er klingt entspannt. Vielleicht ein bisschen zu entspannt.</p>
+          </article>
+          <article class="card caller reveal hover-target" style="transition-delay: 0.1s;">
+            <span class="caller-tag">02 / misstrauisch</span>
+            <h3>Der Misstrauische</h3>
+            <p>Er stellt Fragen. Viele Fragen.</p>
+          </article>
+          <article class="card caller reveal hover-target" style="transition-delay: 0.2s;">
+            <span class="caller-tag">03 / wütend</span>
+            <h3>Der Wütende</h3>
+            <p>Dieser Call könnte sehr schnell sehr laut werden.</p>
+          </article>
+          <article class="card caller reveal hover-target">
+            <span class="caller-tag">04 / nervös</span>
+            <h3>Der Nervöse</h3>
+            <p>Du musst erstmal Vertrauen aufbauen.</p>
+          </article>
+          <article class="card caller reveal hover-target" style="transition-delay: 0.1s;">
+            <span class="caller-tag">05 / verwirrt</span>
+            <h3>Der Verwirrte</h3>
+            <p>Was wollte er nochmal? Gute Frage.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section id="features">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">Im Büro</div>
+            <h2>MEHR ALS<br>NUR CALLS.</h2>
+          </div>
+          <p class="section-desc">
+            Wenn gerade niemand anruft, gibt es im Büro genug Unsinn zu machen.
+          </p>
+        </div>
+
+        <div class="features">
+          <article class="feature reveal hover-target">
+            <strong>💻 Anrufe abarbeiten</strong>
+            <p>Arbeite deine Calls ab, baue Vertrauen auf und versuche, dein Tagesziel zu schaffen.</p>
+          </article>
+          <article class="feature reveal hover-target" style="transition-delay: 0.1s;">
+            <strong>👥 Solo oder mit Freunden</strong>
+            <p>Spiele alleine oder bring deine Freunde mit ins Callcenter.</p>
+          </article>
+          <article class="feature reveal hover-target">
+            <strong>📄 Büro-Chaos</strong>
+            <p>Wirf Papierbälle, ärgere deine Kollegen und mach das Büro ein bisschen weniger professionell.</p>
+          </article>
+          <article class="feature reveal hover-target" style="transition-delay: 0.1s;">
+            <strong>🚨 Pass auf den Chef auf</strong>
+            <p>Ranjid will ZAHLEN. Zu viele Beschwerden können außerdem sehr schnell unangenehm werden.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY CTA SECTION -->
+    <section id="community">
+      <div class="container">
+        <div class="cta reveal">
+          <div class="section-kicker">Tritt dem Chaos bei</div>
+          <h2>BEREIT ZUM EINSTEMPELN?</h2>
+          <p>
+            SCAMMED ist eine fiktive Comedy-Simulation.
+            Alle Namen, Nummern und Daten sind frei erfunden.
+          </p>
+
+          <div class="buttons" style="justify-content:center; margin-top: 40px;">
+            <a class="btn btn-red hover-target roblox-click" href="https://www.roblox.com/share?code=0512fee003fe364c8d87b2164efbcc29&type=ExperienceDetails&stamp=1791438310755" target="_blank">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5.42 2.222 21.777 5.42l-3.197 16.357-16.358-3.198L5.42 2.222zM14.6 10.36l-3.805-.744-.744 3.805 3.804.743.745-3.804z"/></svg>
+              PLAY ON ROBLOX
+            </a>
+            <a class="btn btn-blurple hover-target discord-click" href="https://discord.gg/abaDCdpz6" target="_blank">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+              JOIN DISCORD
+            </a>
+            <a class="btn btn-tiktok hover-target" href="https://www.tiktok.com/@Packagesim" target="_blank">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68a6.34 6.34 0 0 0 10.86 4.48 6.27 6.27 0 0 0 1.86-4.48V8.69a8.18 8.18 0 0 0 4.87 1.6v-3.6a4.87 4.87 0 0 1-1-.05z"/></svg>
+              TIKTOK
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 SCAMMED — CALL. CONVINCE. CLIMB.</div>
+      <div>Fiktive Comedy-Simulation. Alle Namen, Nummern und Daten sind frei erfunden.</div>
+    </div>
+  </footer>
+
+  <script>
+    /* --- 1. SCROLL REVEAL ANIMATION --- */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    /* --- 2. CUSTOM CURSOR LOGIC --- */
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
+    const hoverTargets = document.querySelectorAll('.hover-target, a, button, .card');
+
+    window.addEventListener('mousemove', (e) => {
+      const posX = e.clientX;
+      const posY = e.clientY;
+      
+      cursorDot.style.left = `${posX}px`;
+      cursorDot.style.top = `${posY}px`;
+      
+      cursorOutline.animate({
+        left: `${posX}px`,
+        top: `${posY}px`
+      }, { duration: 250, fill: "forwards" });
+    });
+
+    hoverTargets.forEach(target => {
+      target.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      target.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+
+    /* --- 3. BUTTON SOUND EFFEKTE (LIZENZFREI) --- */
+    const soundRoblox = document.getElementById('sound-roblox');
+    const soundDiscord = document.getElementById('sound-discord');
+
+    document.querySelectorAll('.roblox-click').forEach(btn => {
+      btn.addEventListener('click', () => {
+        soundRoblox.currentTime = 0;
+        soundRoblox.play().catch(() => {});
+      });
+    });
+
+    document.querySelectorAll('.discord-click').forEach(btn => {
+      btn.addEventListener('click', () => {
+        soundDiscord.currentTime = 0;
+        soundDiscord.play().catch(() => {});
+      });
+    });
+
+    /* --- 4. ROBLOX LIVE PLAYER COUNT (PLACE ID ZU UNIVERSE ID) --- */
+    const PLACE_ID = '133525184182861';
+
+    async function updatePlayerCount() {
+      const playerCountEl = document.getElementById('player-count');
+      try {
+        // 1. Automatische Ermittlung der Universe ID über die Place ID
+        const univRes = await fetch(`https://apis.roproxy.com/universes/v1/places/${PLACE_ID}/universe`);
+        if (!univRes.ok) throw new Error("Universe ID error");
+        const univData = await univRes.json();
+        const universeId = univData.universeId;
+
+        if (!universeId) throw new Error("No universe ID found");
+
+        // 2. Spieleranzahl abrufen
+        const gameRes = await fetch(`https://games.roproxy.com/v1/games?universeIds=${universeId}`);
+        if (!gameRes.ok) throw new Error("Game API error");
+        const gameData = await gameRes.json();
+
+        if (gameData && gameData.data && gameData.data[0]) {
+          const playing = gameData.data[0].playing;
+          playerCountEl.innerText = `${playing.toLocaleString('de-DE')} Spieler aktiv`;
+          return;
+        }
+      } catch (err) {
+        // Fallback über alternative Proxys
+        try {
+          const targetUrl = encodeURIComponent(`https://apis.roblox.com/universes/v1/places/${PLACE_ID}/universe`);
+          const res = await fetch(`https://api.allorigins.win/get?url=${targetUrl}`);
+          if (res.ok) {
+            const data = await res.json();
+            const parsed = JSON.parse(data.contents);
+            if (parsed && parsed.universeId) {
+              const universeId = parsed.universeId;
+              const gameRes = await fetch(`https://corsproxy.io/?https://games.roblox.com/v1/games?universeIds=${universeId}`);
+              const gameData = await gameRes.json();
+              if (gameData && gameData.data && gameData.data[0]) {
+                const playing = gameData.data[0].playing;
+                playerCountEl.innerText = `${playing.toLocaleString('de-DE')} Spieler aktiv`;
+                return;
+              }
+            }
+          }
+        } catch (e) {}
+
+        playerCountEl.innerText = "Jetzt auf Roblox";
+      }
+    }
+
+    updatePlayerCount();
+    setInterval(updatePlayerCount, 30000);
+  </script>
+</body>
+</html>
