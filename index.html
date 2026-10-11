@@ -634,21 +634,32 @@
       });
     });
 
-    /* --- 4. ROBLOX LIVE PLAYER COUNT (UNIVERSE ID: 133525184182861) --- */
+    /* --- 4. ROBLOX LIVE PLAYER COUNT (ROPROXY & CORS-PROXY) --- */
     const UNIVERSE_ID = '133525184182861';
 
     async function updatePlayerCount() {
+      const playerCountEl = document.getElementById('player-count');
       try {
-        const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://games.roblox.com/v1/games?universeIds=' + UNIVERSE_ID)}`);
-        const data = await response.json();
-        const gameData = JSON.parse(data.contents);
-        
-        if (gameData && gameData.data && gameData.data.length > 0) {
-          const activePlayers = gameData.data[0].playing;
-          document.getElementById('player-count').innerText = `${activePlayers.toLocaleString()} Spieler aktiv`;
+        const res = await fetch(`https://games.roproxy.com/v1/games?universeIds=${UNIVERSE_ID}`);
+        if (!res.ok) throw new Error("RoProxy error");
+        const data = await res.json();
+        if (data && data.data && data.data[0]) {
+          const playing = data.data[0].playing;
+          playerCountEl.innerText = `${playing.toLocaleString('de-DE')} Spieler aktiv`;
+          return;
         }
-      } catch (error) {
-        document.getElementById('player-count').innerText = "Jetzt auf Roblox";
+      } catch (err) {
+        try {
+          const altRes = await fetch(`https://corsproxy.io/?https://games.roblox.com/v1/games?universeIds=${UNIVERSE_ID}`);
+          const altData = await altRes.json();
+          if (altData && altData.data && altData.data[0]) {
+            const playing = altData.data[0].playing;
+            playerCountEl.innerText = `${playing.toLocaleString('de-DE')} Spieler aktiv`;
+            return;
+          }
+        } catch (e) {
+          playerCountEl.innerText = "Jetzt auf Roblox";
+        }
       }
     }
 
@@ -657,4 +668,3 @@
   </script>
 </body>
 </html>
-
